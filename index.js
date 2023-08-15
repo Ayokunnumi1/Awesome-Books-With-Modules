@@ -30,5 +30,6 @@ addButton.addEventListener('click', (e) => {
 });
 window.addEventListener('DOMContentLoaded', () => {
   BookLibrary.displayBooks();
+  BookLibrary.updateCurrentTime();
   list.style.display = 'flex';
 });

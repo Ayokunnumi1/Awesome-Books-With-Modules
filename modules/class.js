@@ -1,6 +1,9 @@
+import getDateAndTime from './date-time.js';
+
 const titleInput = document.querySelector('#title-input');
 const authorInput = document.querySelector('#author-input');
 const bookCollectionContainer = document.querySelector('#book-collection-container');
+const currentTime = document.querySelector('.current-time');
 
 class BookLibrary {
   static getFromLocalStorage = () => {
@@ -56,6 +59,21 @@ class BookLibrary {
       });
       removeButtonContainer.appendChild(removeButton);
     });
+  }
+
+  static updateCurrentTime() {
+    const currentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const options = {
+      timeZone: currentTimeZone,
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    };
+    const theCurrentTime = getDateAndTime(options);
+    currentTime.textContent = `The Current Time: ${theCurrentTime}`;
   }
 }
 
