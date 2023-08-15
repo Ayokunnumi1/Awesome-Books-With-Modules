@@ -1,4 +1,3 @@
-
 // import bookCreation from './modules/class.js';
 
 export const addNewLink = document.querySelector('.add-new-link');
