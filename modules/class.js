@@ -3,9 +3,7 @@ const authorInput = document.querySelector('#author-input');
 const bookCollectionContainer = document.querySelector('#book-collection-container');
 
 class BookLibrary {
-  static books = this.getFromLocalStorage();
-
-  static getFromLocalStorage() {
+  static getFromLocalStorage = () => {
     const getData = localStorage.getItem('bookArray');
     if (getData) {
       return JSON.parse(getData);
@@ -13,31 +11,26 @@ class BookLibrary {
     return [];
   }
 
-  static getTitleInput() {
-    return titleInput.value.trim();
-  }
+  static books = this.getFromLocalStorage();
 
-  static getAuthorInput() {
-    return authorInput.value.trim();
-  }
+  static getTitleInput = () => titleInput.value.trim();
 
-  static createBook() {
+  static getAuthorInput =() => authorInput.value.trim();
+
+  static createBook = () => {
     const title = this.getTitleInput();
     const author = this.getAuthorInput();
     if (title && author) {
       const newBook = { title, author };
-      this.books.push(newBook);
+      this.books = [...this.books, newBook];
     }
     titleInput.value = '';
     authorInput.value = '';
   }
 
-  static setToLocalStorage() {
-    return localStorage.setItem('bookArray', JSON.stringify(this.books));
-  }
+  static setToLocalStorage = () => localStorage.setItem('bookArray', JSON.stringify(this.books));
 
-  static displayBooks() {
-    // this.getFromLocalStorage();
+  static displayBooks =() => {
     bookCollectionContainer.innerHTML = '';
     this.books.forEach((book, index) => {
       const bookItem = document.createElement('div');
@@ -56,7 +49,6 @@ class BookLibrary {
       const removeButton = document.createElement('button');
       removeButton.setAttribute('class', 'remove-button');
       removeButton.textContent = 'remove';
-      // eslint-disable-next-line no-unused-expressions
       removeButton.addEventListener('click', () => {
         this.books = this.books.filter((_book, i) => (i !== index));
         this.setToLocalStorage();
@@ -67,5 +59,4 @@ class BookLibrary {
   }
 }
 
-const bookCreation = new BookLibrary();
-export default bookCreation;
+export default BookLibrary;
